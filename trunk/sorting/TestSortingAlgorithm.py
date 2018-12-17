@@ -6,7 +6,7 @@ import trunk.sorting.my_sort as my_sort
 
 class TestBubbleSort(unittest.TestCase):
     def setUp(self):
-        N = 10_000
+        N = 10
         self.sort_algorithm = my_sort.bubble_sort
         self.equals_array = random.sample(range(0, N), N)
         self.array = [random.randint(0, N) for _ in range(N)]
@@ -14,13 +14,13 @@ class TestBubbleSort(unittest.TestCase):
     def test_sort_equals_list(self):
         my_array = self.equals_array[:]
         my_array.sort()
-        my_sort.insertion_sort(self.equals_array)
+        self.sort_algorithm(self.equals_array)
         self.assertEqual(self.equals_array, my_array)
 
     def test_sort_not_equals_list(self):
         my_array = self.array[:]
         my_array.sort()
-        my_sort.insertion_sort(self.array)
+        self.sort_algorithm(self.array)
         self.assertEqual(self.array, my_array)
 
     def test_specific_sort(self):
@@ -41,7 +41,7 @@ class TestBubbleSort(unittest.TestCase):
 
 class TestSelectionSort(TestBubbleSort):
     def setUp(self):
-        N = 10_000
+        N = 10
         self.sort_algorithm = my_sort.selection_sort
         self.equals_array = random.sample(range(0, N), N)
         self.array = [random.randint(0, N) for _ in range(N)]
@@ -49,10 +49,19 @@ class TestSelectionSort(TestBubbleSort):
 
 class TestInsertingSort(TestBubbleSort):
     def setUp(self):
-        N = 10_000
+        N = 10
         self.sort_algorithm = my_sort.insertion_sort
         self.equals_array = random.sample(range(0, N), N)
         self.array = [random.randint(0, N) for _ in range(N)]
 
-    if __name__ == '__main__':
-        unittest.main()
+
+class TestMergeSort(TestBubbleSort):
+    def setUp(self):
+        N = 100_000
+        self.sort_algorithm = my_sort.merge_sort
+        self.equals_array = random.sample(range(0, N), N)
+        self.array = [random.randint(0, N) for _ in range(N)]
+
+
+if __name__ == '__main__':
+    unittest.main()
